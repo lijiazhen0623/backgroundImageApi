@@ -1,9 +1,11 @@
 // 应用入口文件，初始化 Express 应用并挂载路由
-
+// 引入 dotenv 库，加载 .env 文件
+require("dotenv").config({ path: "./.env" });
 const express = require("express");
 const routes = require("./routes");
 const morgan = require('morgan'); // 导入 morgan 中间件
 const path = require("path");
+const { initConfig } = require("./utils/init");
 
 const app = express();
 
@@ -32,6 +34,17 @@ app.get("/horizontal", (req, res) => {
 });
 app.get("/vertical", (req, res) => {
   res.sendFile(path.join(__dirname, "public/vertical", "index.html"));
+});
+
+// 设置监听端口
+const PORT = process.env.PORT || 3000;
+
+// 启动服务器
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+
+  //初始化
+  initConfig();
 });
 
 module.exports = app;
