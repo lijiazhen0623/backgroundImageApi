@@ -1,5 +1,5 @@
 // 引入 dotenv 库，加载 .env 文件
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 
 const { getAccessToken } = require("../services/123PanService");
 const {

@@ -12,11 +12,12 @@ RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 # 安装依赖
 RUN npm install
 
-# 将应用代码复制到容器中
-COPY ./src /app
+
+# 复制项目文件
+COPY . . 
 
 # 暴露容器的 3000 端口
 EXPOSE 3000
 
 # 启动应用
-CMD ["node", "server.js"]
+CMD ["node", "./src/server.js"]
