@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 # 设置工作目录
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # 将 package.json 和 package-lock.json 复制到容器中
 COPY package*.json ./
@@ -13,7 +13,7 @@ RUN npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 RUN npm install
 
 # 将应用代码复制到容器中
-COPY ./src /usr/src/app
+COPY ./src /app
 
 # 暴露容器的 3000 端口
 EXPOSE 3000
