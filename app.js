@@ -2,10 +2,10 @@
 // 引入 dotenv 库，加载 .env 文件
 require("dotenv").config({ path: "./.env" });
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./src/routes");
 const morgan = require('morgan'); // 导入 morgan 中间件
 const path = require("path");
-const { initConfig } = require("./utils/init");
+const { initConfig } = require("./src/utils/init");
 
 const app = express();
 
@@ -24,16 +24,16 @@ app.use(express.json()); // 解析 JSON 请求体
 app.use("/api", routes); // 挂载 API 路由
 
 // 设置静态文件目录
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "./src/public")));
 // 默认路由返回 index.html
 app.get("/adaptive", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/adaptive", "index.html"));
+  res.sendFile(path.join(__dirname, "./src/public/adaptive", "index.html"));
 });
 app.get("/horizontal", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/horizontal", "index.html"));
+  res.sendFile(path.join(__dirname, "./src/public/horizontal", "index.html"));
 });
 app.get("/vertical", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/vertical", "index.html"));
+  res.sendFile(path.join(__dirname, "./src/public/vertical", "index.html"));
 });
 
 // 设置监听端口
