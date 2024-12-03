@@ -81,6 +81,28 @@ async function getHorizontalImageUrl(req, res) {
   }
 }
 
+async function getHorizontalImageUrlJson(req, res) {
+  try {
+    const data = {
+      parentFileId: "yk6baz03t0m000d5qauzx31wsch0ewizDIYwAdrPDdD2AcxwDdQ=",
+      limit: 50,
+      // startTime,
+      // endTime,
+      lastFileId: randomHorizontalLastFileId(),
+      type: 1,
+    };
+    const response = await getOssFileList(data);
+    mergeHorizontalUserSelfURLs(response);
+    console.log(response);
+    const horizontalUrl = randomHorizontalUrl();
+    // 返回 JSON 数据
+    res.json({ success: true, url: horizontalUrl });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
+
 // vertical 竖屏壁纸url获取
 async function getVerticalImageUrl(req, res) {
   try {
@@ -103,9 +125,32 @@ async function getVerticalImageUrl(req, res) {
   }
 }
 
+async function getVerticalImageUrlJson(req, res) {
+  try {
+    const data = {
+      parentFileId: "yk6baz03t0l000d5qauzeka3751iglc2DIYwAdrPDdD2AcxwDdQ=",
+      limit: 50,
+      // startTime,
+      // endTime,
+      lastFileId: randomVerticalLastFileId(),
+      type: 1,
+    };
+    const response = await getOssFileList(data);
+    mergeVerticalUserSelfURLs(response);
+    console.log(response);
+    const verticalUrl = randomVerticalUrl();
+    // 返回 JSON 数据
+    res.json({ success: true, url: verticalUrl });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+
 module.exports = {
   handleGetAccessToken,
   handleForceGetAccessToken,
+  getHorizontalImageUrlJson,
   getHorizontalImageUrl,
+  getVerticalImageUrlJson,
   getVerticalImageUrl,
 };

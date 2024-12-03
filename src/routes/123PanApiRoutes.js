@@ -4,7 +4,9 @@ const express = require("express");
 const {
   handleGetAccessToken,
   handleForceGetAccessToken,
+  getHorizontalImageUrlJson,
   getHorizontalImageUrl,
+  getVerticalImageUrlJson,
   getVerticalImageUrl,
 } = require("../controllers/123PanController");
 
@@ -19,7 +21,11 @@ router.get("/getForce123PanToken", handleForceGetAccessToken);
 // 横屏壁纸
 router.get("/horizontal", getHorizontalImageUrl);
 
+router.get("/horizontalJson", getHorizontalImageUrlJson);
+
 // 竖屏壁纸
 router.get("/vertical", getVerticalImageUrl);
+
+router.get("/verticalJson", getVerticalImageUrlJson);
 
 module.exports = router;

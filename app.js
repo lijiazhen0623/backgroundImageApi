@@ -18,6 +18,14 @@ app.use((err, req, res, next) => {
   console.error(`[${time}] Error occurred: ${err.message}`);
   res.status(500).send('Something went wrong!');
 });
+// 自定义中间件设置 CORS 头
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // 允许的来源，'*' 表示允许所有
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // 允许的 HTTP 方法
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // 允许的自定义头
+  next();
+});
+
 
 
 app.use(express.json()); // 解析 JSON 请求体
@@ -27,7 +35,7 @@ app.use("/api", routes); // 挂载 API 路由
 app.use(express.static(path.join(__dirname, "./src/public")));
 // 默认路由返回 index.html
 app.get("/adaptive", (req, res) => {
-  res.sendFile(path.join(__dirname, "./src/public/adaptive", "index.html"));
+  res.sendFile(path.join(__dirname, "./src/public/adaptive", "script.js"));
 });
 app.get("/horizontal", (req, res) => {
   res.sendFile(path.join(__dirname, "./src/public/horizontal", "index.html"));
