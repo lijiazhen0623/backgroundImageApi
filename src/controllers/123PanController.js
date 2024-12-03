@@ -17,7 +17,7 @@ const {
 const moment = require("moment");
 
 // 强制获取token
-async function handleForceGetAccessToken(req, res) {
+async function handleForceGetAccessToken123Pan(req, res) {
   try {
     const response = await getAccessToken();
     console.log(response);
@@ -33,7 +33,7 @@ async function handleForceGetAccessToken(req, res) {
 }
 
 // 获取token
-async function handleGetAccessToken(req, res) {
+async function handleGetAccessToken123Pan(req, res) {
   const tokenData = getTokenData(); // 尝试从文件读取 token
 
   if (tokenData) {
@@ -60,7 +60,7 @@ function isTokenExpired(expiredAt) {
 }
 
 // horizontal 横屏壁纸url获取
-async function getHorizontalImageUrl(req, res) {
+async function getHorizontalImageUrl123Pan(req, res) {
   try {
     const data = {
       parentFileId: "yk6baz03t0m000d5qauzx31wsch0ewizDIYwAdrPDdD2AcxwDdQ=",
@@ -81,7 +81,7 @@ async function getHorizontalImageUrl(req, res) {
   }
 }
 
-async function getHorizontalImageUrlJson(req, res) {
+async function getHorizontalImageUrlJson123Pan(req, res) {
   try {
     const data = {
       parentFileId: "yk6baz03t0m000d5qauzx31wsch0ewizDIYwAdrPDdD2AcxwDdQ=",
@@ -104,7 +104,7 @@ async function getHorizontalImageUrlJson(req, res) {
 
 
 // vertical 竖屏壁纸url获取
-async function getVerticalImageUrl(req, res) {
+async function getVerticalImageUrl123Pan(req, res) {
   try {
     const data = {
       parentFileId: "yk6baz03t0l000d5qauzeka3751iglc2DIYwAdrPDdD2AcxwDdQ=",
@@ -125,7 +125,7 @@ async function getVerticalImageUrl(req, res) {
   }
 }
 
-async function getVerticalImageUrlJson(req, res) {
+async function getVerticalImageUrlJson123Pan(req, res) {
   try {
     const data = {
       parentFileId: "yk6baz03t0l000d5qauzeka3751iglc2DIYwAdrPDdD2AcxwDdQ=",
@@ -147,10 +147,10 @@ async function getVerticalImageUrlJson(req, res) {
 }
 
 module.exports = {
-  handleGetAccessToken,
-  handleForceGetAccessToken,
-  getHorizontalImageUrlJson,
-  getHorizontalImageUrl,
-  getVerticalImageUrlJson,
-  getVerticalImageUrl,
+  handleGetAccessToken123Pan,
+  handleForceGetAccessToken123Pan,
+  getHorizontalImageUrlJson123Pan,
+  getHorizontalImageUrl123Pan,
+  getVerticalImageUrlJson123Pan,
+  getVerticalImageUrl123Pan,
 };

@@ -4,11 +4,11 @@ const express = require("express");
 const {
   handleGetAccessToken,
   handleForceGetAccessToken,
-  getHorizontalImageUrlJson,
   getHorizontalImageUrl,
-  getVerticalImageUrlJson,
+  getHorizontalImageUrlJson,
   getVerticalImageUrl,
-} = require("../controllers/123PanController");
+  getVerticalImageUrlJson,
+} = require("../controllers/index");
 
 const router = express.Router();
 

@@ -6,8 +6,11 @@ const {
 // 使用 moment.js 进行时间比较
 const moment = require("moment");
 
+const mode = process.env.MODE || 2;
+
 async function initConfig() {
   console.log("初始化配置。。。");
+  console.log("当前为 " +( mode == 2 ? "alist" : "123盘")+" 模式");
   setTimeout(async () => {
     await init123panConfig(); // 自动获取并处理 token
     console.log("初始化token完成。");

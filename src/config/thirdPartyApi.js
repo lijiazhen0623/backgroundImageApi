@@ -5,8 +5,10 @@ module.exports = {
     clientID: process.env.API1PAN_CLIENT_ID,
     Platform: process.env.API1PAN_PLATFORM,
   },
-  //   api2: {
-  //     baseUrl: "https://api2.example.com",
-  //     apiKey: process.env.API2_KEY,
-  //   },
+  api2: {
+    baseUrl: process.env.API2ALIST_BASEURL,
+    alistToken: process.env.API2ALIST_TOKEN,
+    horizontalImageRootPath: process.env.API2ALIST_HORIZONTALIMAGEROOTPATH,
+    verticalImageRootPath: process.env.API2ALIST_VERTICALIMAGEROOTPATH,
+  },
 };
