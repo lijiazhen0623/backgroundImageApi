@@ -1,7 +1,7 @@
 class IPBlacklistTool {
   constructor(
     requestLimitPerMinute = 30,
-    blockTime = 8 * 60 * 60 * 1000,
+    blockTime = 8,
     maxBlacklistSize = 1000
   ) {
     // 黑名单存储，使用 Set 保证唯一性
@@ -11,7 +11,7 @@ class IPBlacklistTool {
     // 请求限制：每分钟最多请求次数
     this.requestLimitPerMinute = requestLimitPerMinute;
     // 阻止时间：封禁持续时间，修改为8小时
-    this.blockTime = blockTime;
+    this.blockTime = blockTime * 60 * 60 * 1000;
     // 黑名单最大大小
     this.maxBlacklistSize = maxBlacklistSize;
 
@@ -23,6 +23,8 @@ class IPBlacklistTool {
 
     // 打印黑名单系统启动日志
     console.log("IP Blacklist system started.");
+
+    console.log("每分钟请求次数：" + requestLimitPerMinute + "  封禁时间(小时)："+blockTime);
   }
 
   // 启用 Express 的 trust proxy 配置

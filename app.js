@@ -15,7 +15,11 @@ app.use(morgan('combined')); // 'combined' 格式包含详细的日志信息
 
 //==============黑名单===========
  // 每分钟最多请求30次，封禁时间8小时，黑名单最大1000个IP
-const ipBlacklistTool = new IPBlacklistTool(30, 8 * 60 * 60 * 1000, 1000);
+const ipBlacklistTool = new IPBlacklistTool(
+  process.env.REQUEST_LIMIT_PERMINUTE,
+  process.env.BLOCK_TIME,
+  1000
+);
 // 启用 trust proxy 配置
 ipBlacklistTool.enableTrustProxy(app);
 // 使用中间件处理IP请求
