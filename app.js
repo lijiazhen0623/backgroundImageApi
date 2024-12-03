@@ -6,11 +6,21 @@ const routes = require("./src/routes");
 const morgan = require('morgan'); // 导入 morgan 中间件
 const path = require("path");
 const { initConfig } = require("./src/utils/init");
-
+const IPBlacklistTool = require('./src/utils/IPBlacklistTool'); // 引入黑名单工具类
 const app = express();
+
 
 // 使用 morgan 中间件记录请求日志
 app.use(morgan('combined')); // 'combined' 格式包含详细的日志信息
+
+//==============黑名单===========
+ // 每分钟最多请求30次，封禁时间8小时，黑名单最大1000个IP
+const ipBlacklistTool = new IPBlacklistTool(30, 8 * 60 * 60 * 1000, 1000);
+// 启用 trust proxy 配置
+ipBlacklistTool.enableTrustProxy(app);
+// 使用中间件处理IP请求
+app.use((req, res, next) => ipBlacklistTool.handleRequest(req, res, next));
+//=================================
 
 // 捕获所有未处理的错误
 app.use((err, req, res, next) => {
