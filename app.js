@@ -19,12 +19,12 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 // 自定义中间件设置 CORS 头
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // 允许的来源，'*' 表示允许所有
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // 允许的 HTTP 方法
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // 允许的自定义头
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*'); // 允许的来源，'*' 表示允许所有
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // 允许的 HTTP 方法
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // 允许的自定义头
+//   next();
+// });
 
 
 
