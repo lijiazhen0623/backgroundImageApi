@@ -26,15 +26,19 @@ class SyncImages {
     } else {
       console.log("存在图片文件不需要初始化桶");
     }
-    // 设置每天定时执行（例：每天的 00:00 执行）
+    // 设置每天定时执行（例：每天的 01:00 执行）
     cron.schedule(
       "0 1 * * *",
       async () => {
-        console.log("开始执行图片同步任务...");
-        await this.syncImages();
+        try {
+          console.log("开始执行图片同步任务...");
+          await this.syncImages();
+        } catch (error) {
+          console.error("图片同步任务执行失败：", error);
+        }
       },
       {
-        timezone: "Asia/Shanghai", // 使用中国时区
+        timezone: "Asia/Shanghai", // 设置为中国时区（CST）
       }
     );
   }
