@@ -36,7 +36,7 @@ class SyncImages {
   // 获取图片 URL，直到每种图片类型分别获取 200 个唯一的图片
   async collectImages() {
     // 获取水平图片，直到数量达到 200 个唯一图片
-    while (this.horizontalImages.size < 200) {
+    while (this.horizontalImages.size < process.env.R2_SYNC_COUNT) {
       console.log("获取horizontal图片...");
       const horizontalPath = await getRandomFilePath(horizontalImageRootPath);
       this.horizontalImages.add(horizontalPath);
@@ -44,14 +44,12 @@ class SyncImages {
     console.log(`horizontal图片路径获取完成: ${this.horizontalImages.size}`);
 
     // 获取垂直图片，直到数量达到 200 个唯一图片
-    while (this.verticalImages.size < 200) {
+    while (this.verticalImages.size < process.env.R2_SYNC_COUNT) {
       console.log("获取vertical图片...");
       const verticalPath = await getRandomFilePath(verticalImageRootPath);
       this.verticalImages.add(verticalPath);
     }
     console.log(`vertical图片路径获取完成: ${this.verticalImages.size}`);
-
-    console.log("已成功获取 200 个水平图片和 200 个垂直图片。");
   }
 
   // 同步图片到 R2
