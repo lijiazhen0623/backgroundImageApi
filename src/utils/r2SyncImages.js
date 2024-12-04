@@ -27,10 +27,16 @@ class SyncImages {
       console.log("存在图片文件不需要初始化桶");
     }
     // 设置每天定时执行（例：每天的 00:00 执行）
-    cron.schedule("0 0 * * *", async () => {
-      console.log("开始执行图片同步任务...");
-      await this.syncImages();
-    });
+    cron.schedule(
+      "0 1 * * *",
+      async () => {
+        console.log("开始执行图片同步任务...");
+        await this.syncImages();
+      },
+      {
+        timezone: "Asia/Shanghai", // 使用中国时区
+      }
+    );
   }
 
   // 获取图片 URL，直到每种图片类型分别获取 200 个唯一的图片
