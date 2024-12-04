@@ -13,12 +13,10 @@ const r2Util = new R2Util(
 async function getHorizontalImageUrlAlist(req, res) {
   try {
     const horizontalUrl =
-      (process.env.R2_OPEN == 1 &&
-        (await r2Util.getRandomImagePath(
-          process.env.R2_BUCKET_NAME,
-          "二次元图/horizontal/"
-        ))) ||
-      (await randomHorizontalUrl());
+      (await r2Util.getRandomImagePath(
+        process.env.R2_BUCKET_NAME,
+        "二次元图/horizontal/"
+      )) || (await randomHorizontalUrl());
 
     // 重定向到 horizontalUrl
     res.redirect(horizontalUrl);
@@ -30,12 +28,10 @@ async function getHorizontalImageUrlAlist(req, res) {
 async function getHorizontalImageUrlJsonAlist(req, res) {
   try {
     const horizontalUrl =
-      (process.env.R2_OPEN == 1 &&
-        (await r2Util.getRandomImagePath(
-          process.env.R2_BUCKET_NAME,
-          "二次元图/horizontal/"
-        ))) ||
-      (await randomHorizontalUrl());
+      (await r2Util.getRandomImagePath(
+        process.env.R2_BUCKET_NAME,
+        "二次元图/horizontal/"
+      )) || (await randomHorizontalUrl());
     // 返回 JSON 数据
     res.json({ success: true, url: horizontalUrl });
   } catch (error) {
@@ -47,12 +43,10 @@ async function getHorizontalImageUrlJsonAlist(req, res) {
 async function getVerticalImageUrlAlist(req, res) {
   try {
     const verticalUrl =
-      (process.env.R2_OPEN == 1 &&
-        (await r2Util.getRandomImagePath(
-          process.env.R2_BUCKET_NAME,
-          "二次元图/vertical/"
-        ))) ||
-      (await randomVerticalUrl());
+      (await r2Util.getRandomImagePath(
+        process.env.R2_BUCKET_NAME,
+        "二次元图/vertical/"
+      )) || (await randomVerticalUrl());
     // 重定向到 verticalUrl
     res.redirect(verticalUrl);
   } catch (error) {
@@ -63,12 +57,10 @@ async function getVerticalImageUrlAlist(req, res) {
 async function getVerticalImageUrlJsonAlist(req, res) {
   try {
     const verticalUrl =
-      (process.env.R2_OPEN == 1 &&
-        (await r2Util.getRandomImagePath(
-          process.env.R2_BUCKET_NAME,
-          "二次元图/vertical/"
-        ))) ||
-      (await randomVerticalUrl());
+      (await r2Util.getRandomImagePath(
+        process.env.R2_BUCKET_NAME,
+        "二次元图/vertical/"
+      )) || (await randomVerticalUrl());
     // 返回 JSON 数据
     res.json({ success: true, url: verticalUrl });
   } catch (error) {
