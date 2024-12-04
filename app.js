@@ -19,6 +19,7 @@ if (process.env.IPBLACK_OPEN == 1) {
   // 每分钟最多请求30次，封禁时间8小时，黑名单最大1000个IP
   const ipBlacklistTool = new IPBlacklistTool(
     process.env.REQUEST_LIMIT_PERMINUTE,
+    process.env.REQUEST_LIMIT_PERHOUR,
     process.env.BLOCK_TIME,
     1000
   );
