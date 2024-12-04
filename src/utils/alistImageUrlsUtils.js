@@ -61,7 +61,7 @@ async function getRandomFile(imageRootPath, getListDirFn) {
     const randomFile = content[randomIndex];
 
     if (!randomFile.is_dir) {
-      const raw_url = await getRawUrlMap(imageRootPath + "/" + randomFile.name);
+      const raw_url = await getRawUrl(imageRootPath + "/" + randomFile.name);
       return raw_url;
     }
 
@@ -73,7 +73,7 @@ async function getRandomFile(imageRootPath, getListDirFn) {
 }
 
 // 获取 raw_url 的通用函数
-const getRawUrlMap = async (path) => {
+const getRawUrl = async (path) => {
   console.log(`Processing file: ${path}`);
   try {
     const param = {
@@ -103,6 +103,53 @@ const getRawUrlMap = async (path) => {
   }
 };
 
+// 随机获取文件路径的通用函数
+async function getRandomFilePath(imageRootPath) {
+  const totalCount = await getFileCount(imageRootPath, getListDir);
+  if (totalCount === 0) {
+    console.error("没有可用的文件");
+    return null;
+  }
+
+  // 计算总页数
+  const perPage = 20;
+  const totalPages = Math.ceil(totalCount / perPage);
+
+  // 随机选择一个页面
+  const randomPage = Math.floor(Math.random() * totalPages) + 1;
+
+  // 获取该页的文件
+  const param = {
+    path: imageRootPath,
+    page: randomPage,
+    per_page: perPage,
+  };
+
+  try {
+    const response = await getListDir(param);
+    if (response.code !== 200) {
+      console.error(`请求失败：${response.message}`);
+      return null;
+    }
+
+    const { content } = response.data;
+
+    // 随机选择一个文件
+    const randomIndex = Math.floor(Math.random() * content.length);
+    const randomFile = content[randomIndex];
+
+    if (!randomFile.is_dir) {
+      return imageRootPath + "/" + randomFile.name;
+    }
+
+    return null;
+  } catch (error) {
+    console.error(`请求出错：${error.message}`);
+    return null;
+  }
+}
+
+
 // 获取随机横屏 URL
 async function randomHorizontalUrl() {
   const rawUrl = await getRandomFile(horizontalImageRootPath, getListDir);
@@ -130,4 +177,6 @@ async function randomVerticalUrl() {
 module.exports = {
   randomHorizontalUrl,
   randomVerticalUrl,
+  getRandomFilePath,
+  getRawUrl,
 };
