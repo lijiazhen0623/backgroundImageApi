@@ -3,20 +3,19 @@
 require("dotenv").config({ path: "./.env" });
 const express = require("express");
 const routes = require("./src/routes");
-const morgan = require('morgan'); // 导入 morgan 中间件
+const morgan = require("morgan"); // 导入 morgan 中间件
 const path = require("path");
 const { initConfig } = require("./src/utils/init");
-const IPBlacklistTool = require('./src/utils/IPBlacklistTool'); // 引入黑名单工具类
+const IPBlacklistTool = require("./src/utils/IPBlacklistTool"); // 引入黑名单工具类
 const R2Util = require("./src/utils/r2Util");
 const SyncImages = require("./src/utils/r2SyncImages");
 const app = express();
 
-
 // 使用 morgan 中间件记录请求日志
-app.use(morgan('combined')); // 'combined' 格式包含详细的日志信息
+app.use(morgan("combined")); // 'combined' 格式包含详细的日志信息
 
 //==============黑名单===========
- // 每分钟最多请求30次，封禁时间8小时，黑名单最大1000个IP
+// 每分钟最多请求30次，封禁时间8小时，黑名单最大1000个IP
 const ipBlacklistTool = new IPBlacklistTool(
   process.env.REQUEST_LIMIT_PERMINUTE,
   process.env.BLOCK_TIME,
@@ -32,7 +31,7 @@ app.use((req, res, next) => ipBlacklistTool.handleRequest(req, res, next));
 app.use((err, req, res, next) => {
   const time = new Date().toISOString();
   console.error(`[${time}] Error occurred: ${err.message}`);
-  res.status(500).send('Something went wrong!');
+  res.status(500).send("Something went wrong!");
 });
 // 自定义中间件设置 CORS 头
 // app.use((req, res, next) => {
@@ -42,15 +41,16 @@ app.use((err, req, res, next) => {
 //   next();
 // });
 //=================r2同步==========
-// const r2Util = new R2Util(
-//   process.env.R2_ACCESS_KEY_ID,
-//   process.env.R2_SECRET_ACCESS_KEY,
-//   process.env.R2_ENDPOINT
-// );
-// const syncImages = new SyncImages(r2Util, process.env.R2_BUCKET_NAME);
-// syncImages.startSync();
+if (process.env.R2_OPEN == 1) {
+  const r2Util = new R2Util(
+    process.env.R2_ACCESS_KEY_ID,
+    process.env.R2_SECRET_ACCESS_KEY,
+    process.env.R2_ENDPOINT
+  );
+  const syncImages = new SyncImages(r2Util, process.env.R2_BUCKET_NAME);
+  syncImages.startSync();
+}
 //======================
-
 
 app.use(express.json()); // 解析 JSON 请求体
 app.use("/api", routes); // 挂载 API 路由
