@@ -7,6 +7,8 @@ const morgan = require('morgan'); // 导入 morgan 中间件
 const path = require("path");
 const { initConfig } = require("./src/utils/init");
 const IPBlacklistTool = require('./src/utils/IPBlacklistTool'); // 引入黑名单工具类
+const R2Util = require("./src/utils/r2Util");
+const SyncImages = require("./src/utils/r2SyncImages");
 const app = express();
 
 
@@ -39,7 +41,15 @@ app.use((err, req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // 允许的自定义头
 //   next();
 // });
-
+//=================r2同步==========
+// const r2Util = new R2Util(
+//   process.env.R2_ACCESS_KEY_ID,
+//   process.env.R2_SECRET_ACCESS_KEY,
+//   process.env.R2_ENDPOINT
+// );
+// const syncImages = new SyncImages(r2Util, process.env.R2_BUCKET_NAME);
+// syncImages.startSync();
+//======================
 
 
 app.use(express.json()); // 解析 JSON 请求体
