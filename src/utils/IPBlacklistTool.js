@@ -1,4 +1,4 @@
-const { Deque } = require("collections");// 引入双端队列库
+const Deque = require("collections/deque"); // 引入双端队列库
 
 class IPBlacklistTool {
   constructor(
@@ -66,13 +66,10 @@ class IPBlacklistTool {
       this.ipRequests.set(ip, new Deque());
     }
 
-    const requests = this.ipRequests.get(ip);
+    const requests = this.ipRequests.get(ip); // 获取请求记录
 
     // 只保留过去1分钟内的请求记录
-    while (
-      requests.length > 0 &&
-      currentTime - requests.peekFront() > 60 * 1000
-    ) {
+    while (requests.length > 0 && currentTime - requests.peek() > 60 * 1000) {
       requests.shift(); // 移除超过1分钟的请求
     }
 
