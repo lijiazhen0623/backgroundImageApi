@@ -11,6 +11,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./.env:/app/.env
+      - ./api_call_counts.json:/app/api_call_counts.json
     networks:
       - app-network
 

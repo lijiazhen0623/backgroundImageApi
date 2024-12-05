@@ -14,6 +14,11 @@ const {
   getVerticalImageUrlJsonAlist,
 } = require("../controllers/alistController");
 
+const {
+  getCallStats,
+  getAllCallStats,
+} = require("../controllers/callController");
+
 //  1为123盘 2为alist
 const mode = process.env.MODE || 2;
 
@@ -61,6 +66,14 @@ async function getVerticalImageUrlJson(req, res) {
   }
 }
 
+async function getApiCallStats(req, res) {
+  await getCallStats(req, res);
+}
+
+async function getApiAllCallStats(req, res) {
+  await getAllCallStats(req, res);
+}
+
 module.exports = {
   handleForceGetAccessToken,
   handleGetAccessToken,
@@ -68,4 +81,6 @@ module.exports = {
   getHorizontalImageUrlJson,
   getVerticalImageUrl,
   getVerticalImageUrlJson,
+  getApiCallStats,
+  getApiAllCallStats,
 };

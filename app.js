@@ -55,6 +55,16 @@ if (process.env.R2_OPEN == 1) {
 }
 //======================
 
+//=========================调用次数统计=====================
+const CallCountTracker = require("./src/utils/callCountTracker");
+const tracker = CallCountTracker.getInstance(undefined);
+
+app.use((req, res, next) => {
+  tracker.recordCall(req.path);
+  next();
+});
+//==============================================
+
 app.use(express.json()); // 解析 JSON 请求体
 app.use("/api", routes); // 挂载 API 路由
 

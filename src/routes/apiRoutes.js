@@ -8,6 +8,8 @@ const {
   getHorizontalImageUrlJson,
   getVerticalImageUrl,
   getVerticalImageUrlJson,
+  getApiCallStats,
+  getApiAllCallStats,
 } = require("../controllers/index");
 
 const router = express.Router();
@@ -27,5 +29,10 @@ router.get("/horizontalJson", getHorizontalImageUrlJson);
 router.get("/vertical", getVerticalImageUrl);
 
 router.get("/verticalJson", getVerticalImageUrlJson);
+
+//api调用记录
+router.get("/callStats", getApiCallStats);
+
+router.get("/allCallStats", getApiAllCallStats);
 
 module.exports = router;
