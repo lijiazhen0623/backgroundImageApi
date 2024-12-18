@@ -37,7 +37,10 @@ class R2Util {
   }
 
   // 检查桶的总大小并删除最早的文件直到总大小不超过8GB maxSize = 8 * 1024 * 1024 * 1024
-  async checkAndDeleteOldFiles(bucketName, maxSize = 8 * 1024 * 1024 * 1024) {
+  async checkAndDeleteOldFiles(
+    bucketName,
+    maxSize = process.env.R2_MAX_SIZE * 1024 * 1024 * 1024
+  ) {
     console.log(`开始检查桶 ${bucketName} 的总大小...`);
 
     const params = {
@@ -197,7 +200,10 @@ class R2Util {
   }
 
   // 检查桶的总大小是否超过 8GB
-  async isBucketSizeOverLimit(bucketName, maxSize = 8 * 1024 * 1024 * 1024) {
+  async isBucketSizeOverLimit(
+    bucketName,
+    maxSize = process.env.R2_MAX_SIZE * 1024 * 1024 * 1024
+  ) {
     console.log(
       `开始检查桶 ${bucketName} 的总大小是否超过 ${
         maxSize / (1024 * 1024 * 1024)
